@@ -1,0 +1,18 @@
+---
+- hosts: all
+  gather_facts: true
+  become: true
+
+  tasks:
+    - name: check for pihole updates
+      script: scripts/checkpiholeupdate.sh
+      register: checkpiholeupdate
+      changed_when: checkpiholeupdate.rc == 1
+      failed_when: "checkpiholeupdate.rc not in [ 0, 1 ]"
+
+    - name: update pihole
+      script: scripts/piholeupdate.sh
+      register: piholeupdate
+      changed_when: piholeupdate.rc == 1
+      failed_when: "piholeupdate.rc not in [ 0, 1 ]"
+      when: checkpiholeupdate.rc == 1
