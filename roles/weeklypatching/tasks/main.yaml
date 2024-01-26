@@ -43,4 +43,4 @@
 
 - name: debug
   debug:
-    msg: "{{ chatid }} - {{ token }}"
+    msg: "this is a test"
