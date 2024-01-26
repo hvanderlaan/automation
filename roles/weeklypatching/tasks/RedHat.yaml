@@ -56,4 +56,5 @@
     body: '{"chat_id": "{{ chatid }}", "text": "{{ inventory_hostname}} updates installed"}'
     headers:
       Content-Type: application/json
+    status_code: 204
   when: updates.changed
