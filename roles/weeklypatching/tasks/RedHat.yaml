@@ -46,3 +46,14 @@
   yum:
     name: "*"
     state: latest
+  register: updates
+
+- name: notify -> Send notify message
+  url:
+    url: "https://api.telegram.org/bot{{ token }}/sendMessage"
+    methode: POST
+    body_format: json
+    body: '{"chat_id": "{{ chatid }}", "text": "{{ inventory_hostname}} updates installed"}'
+    headers:
+      Content-Type: application/json
+  when: updates.changed
