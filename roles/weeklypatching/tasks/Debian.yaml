@@ -49,6 +49,10 @@
     autoclean: true
   register: updates
 
+- name: debug
+  debug:
+    msg: "{{ token }}"
+
 - name: notify -> Send notify message
   url:
     url: "https://api.telegram.org/bot{{ token }}/sendMessage"
@@ -58,4 +62,4 @@
     headers:
       Content-Type: application/json
     status_code: 204
-  when: updates.ok
+  when: updates.changed
