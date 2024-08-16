@@ -1,0 +1,49 @@
+---
+# ============================================================================ #
+# File   : roles/weeklypatching/tasks/Debian.yaml                              #
+# Purpose: running weeklypatching on Debian based systems                      #
+#                                                                              #
+# Author : Harald van der Laan                                                 #
+# Date   : 2022-04-19                                                          #
+# Version: v1.0.1                                                              #
+# ============================================================================ #
+# Changelog:                                                                   #
+# - v1.0.1: update cache_valid_time                      (Harald van der Laan) #
+# - v1.0.0: Initial commit                               (Harald van der Laan) #
+# ============================================================================ #
+# Copyright © 2020 Harald van der Laan                                         #
+#                                                                              #
+# Permission is hereby granted, free of charge, to any person obtaining        #
+# a copy of this software and associated documentation files (the "Software"), #
+# to deal in the Software without restriction, including without limitation    #
+# the rights to use, copy, modify, merge, publish, distribute, sublicense,     #
+# and/or sell copies of the Software, and to permit persons to whom the        #
+# Software is furnished to do so, subject to the following conditions:         #
+#                                                                              #
+# The above copyright notice and this permission notice shall be included      #
+# in all copies or substantial portions of the Software.                       #
+#                                                                              #
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,              #
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES              #
+# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.    #
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,  #
+# DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,                #
+# TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE   #
+# OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                                #
+# ============================================================================ #
+
+# This is a Debian based os specific platbook and should run only on Debian
+# based systems
+
+# updating the apt repository's when these are older than 86400 seconds
+- name: apt -> update apt repository's
+  apt:
+    update_cache: true
+    cache_valid_time: 43200
+
+# using apt to fownload en install the latest patches
+- name: apt -> download and install latest patches and clean-up
+  apt:
+    upgrade: safe
+    autoremove: true
+    autoclean: true
