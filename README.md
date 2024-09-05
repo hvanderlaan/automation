@@ -1,17 +1,19 @@
-# Ansible
+# Automation
 
-This Ansible repositiry is for provisioning systems and test servers with Ansible Tower.
-[AWX brakkedoos](http://awx.brakkedoos.nl)
+Automation is a repo to use Ansible with Semaphore a web ui. This wull create a Ansible AWX/Tower alternative that is open-source. In order to use this you need docker / docker compose to be installed on the system.
 
-## Usage
+## Installtion
 
-```bash
-git clone https://git.brakkedoos.nl/hvanderlaan/ansible
-cd ansible
+```
+mv ansible-ui/docker-compose.yaml.sample ansible-ui/docker-compose.yaml
+cd ansible-ui
 
-# edit inventory/production with your servers
-ansible-playbook site.yaml --ask-vault-pass
-ansible-playbook playbooks/weeklypatching.yaml --ask-vault-pass
+vi docker-compose.yaml
+# edit SEMAPHORE_ACCESS_KEY_ENCRYPTION:
+# edit MYSQL username/password
+# edit SEMAPHORE username/password
+
+docker compose up -d
 ```
 
 ## License
