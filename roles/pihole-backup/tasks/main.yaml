@@ -1,7 +1,7 @@
 ---
 # ============================================================================ #
-# File   : pihole-backup.yaml                                                  #
-# Purpose: Ansible playbook for backup pihole configuration.                   #
+# File   : roles/pihole-backup/tasks/main.yaml                                 #
+# Purpose: Tasks to backup pihole server.                                      #
 #                                                                              #
 # Author : Harald van der Laan                                                 #
 # Date   : 2024-09-05                                                          #
@@ -10,7 +10,7 @@
 # Changelog:                                                                   #
 # - v1.0.0: initial commit                               (Harald van der Laan) #
 # ============================================================================ #
-# Copyright © 2024 Harald van der Laan                                         #
+# Copyright © 2020 Harald van der Laan                                         #
 #                                                                              #
 # Permission is hereby granted, free of charge, to any person obtaining        #
 # a copy of this software and associated documentation files (the "Software"), #
@@ -31,8 +31,27 @@
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                                #
 # ============================================================================ #
 
-- hosts: dns.brakkedoos.nl
-  gather_facts: true
+- name: check -> check is backup file exists
+  stat:
+    path: pihole-backup.tar.gz
+  register: backupfile
 
-  roles:
-    - { role: pihole-backup, when: ansible_local.ansible.managed.ansible == 'true' }
+- name: bakcup -> create pihole backup
+  raw: 'pihole -a -t pihole-backup.tar.gz'
+  register: backup
+  when: backupfile.stat.exists == false
+
+- name: transfer -> copy pihole backup to nas
+  raw: 'scp pihole-backup.tar.gz 10.0.20.20:/data/backup/pihole/'
+  register: transfer
+  when:
+    - backupfile.stat.exists == false
+    - backup.rc == 0
+
+- name: cleanup -> remove pihole backup
+  file:
+    path: pihole-backup.tar.gz
+    state: absent
+  when:
+    - backupfile.stat.exists == false
+    - transfer.rc == 0
