@@ -1,5 +1,6 @@
 .retry
 .swp
 .DS_Store
+.vscode
 **/docker-compose.yaml
 example-roles/
