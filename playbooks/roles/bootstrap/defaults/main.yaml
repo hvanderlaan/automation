@@ -37,3 +37,4 @@ deb_packages:
   - htop
   - python3-pip
   - dnsutils
+  - neofetch
