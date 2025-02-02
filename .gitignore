@@ -5,3 +5,4 @@
 **/docker-compose.yaml
 example-roles/
 inventory/
+group_vars/
