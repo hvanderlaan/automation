@@ -31,7 +31,7 @@
 # ============================================================================ #
 
 - name: include -> motd section
-  include_tasks: "{{ ansible_distribution }}-motd.yaml"
+  ansible.builtin.include_tasks: "{{ ansible_distribution }}-motd.yaml"
 
 - name: include -> packages section
-  include_tasks: "{{ ansible_distribution }}-packages.yaml"
+  ansible.builtin.include_tasks: "{{ ansible_distribution }}-packages.yaml"

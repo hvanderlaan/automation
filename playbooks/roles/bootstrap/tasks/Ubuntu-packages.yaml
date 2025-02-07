@@ -30,11 +30,15 @@
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                                #
 # ============================================================================ #
 
+- name: apt -> installing system updates
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 86400
+    upgrade: safe
+
 - name: apt -> installing default packages
   ansible.builtin.apt:
     name: "{{ item }}"
-    update_cache: true
-    cache_valid_time: 86400
     state: present
   loop: "{{ deb_packages }}"
 

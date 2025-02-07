@@ -37,13 +37,13 @@
 
 # updating the apt repository's when these are older than 86400 seconds
 - name: apt -> update apt repository's
-  apt:
+  ansible.builtin.apt:
     update_cache: true
     cache_valid_time: 43200
 
 # using apt to fownload en install the latest patches
 - name: apt -> download and install latest patches and clean-up
-  apt:
+  ansible.builtin.apt:
     upgrade: safe
     autoremove: true
     autoclean: true

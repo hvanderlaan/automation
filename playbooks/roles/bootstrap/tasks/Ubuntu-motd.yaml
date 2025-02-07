@@ -31,12 +31,12 @@
 # ============================================================================ #
 
 - name: motd -> remove dynamic motd directory
-  file:
+  ansible.builtin.file:
     path: /etc/update-motd.d
     state: absent
 
 - name: motd -> deploy ansible managed motd
-  template:
+  ansible.builtin.template:
     src: motd.j2
     dest: /etc/motd
     owner: root

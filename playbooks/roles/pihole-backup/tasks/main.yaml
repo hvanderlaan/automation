@@ -32,24 +32,24 @@
 # ============================================================================ #
 
 - name: check -> check is backup file exists
-  stat:
+  ansible.builtin.stat:
     path: pihole-backup.tar.gz
   register: backupfile
 
 - name: bakcup -> create pihole backup
-  raw: 'pihole -a -t pihole-backup.tar.gz'
+  ansible.builtin.raw: 'pihole -a -t pihole-backup.tar.gz'
   register: backup
   when: backupfile.stat.exists == false
 
 - name: transfer -> copy pihole backup to nas
-  raw: 'scp pihole-backup.tar.gz 10.0.20.20:/data/backup/pihole/'
+  ansible.builtin.raw: 'scp pihole-backup.tar.gz 10.0.20.20:/data/backup/pihole/'
   register: transfer
   when:
     - backupfile.stat.exists == false
     - backup.rc == 0
 
 - name: cleanup -> remove pihole backup
-  file:
+  ansible.builtin.file:
     path: pihole-backup.tar.gz
     state: absent
   when:

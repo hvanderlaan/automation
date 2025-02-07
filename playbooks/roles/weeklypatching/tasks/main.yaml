@@ -39,4 +39,4 @@
 # through the include files. This will accellerate the process. Ansible will
 # only include: Debian.yaml or RedHat.yaml
 - name: patches -> include os specific playbook
-  include_tasks: "{{ ansible_os_family }}.yaml"
+  ansible.builtin.include_tasks: "{{ ansible_os_family }}.yaml"

@@ -37,12 +37,12 @@
 
 # updating yum repository's
 - name: yum -> update repository's
-  yum:
+  ansible.builtin.yum:
     update_cache: true
     cacje_valid_time: 86400
 
 # running yum to download end install the latest patches
 - name: yum -> download and install latest patches
-  yum:
+  ansible.builtin.yum:
     name: "*"
     state: latest

@@ -37,7 +37,7 @@
 # please edit this template only in version control and not directly on the
 # remote target. all changes there wull be overwritten after this role is runned
 - name: facts -> deploying facts file template to /etc/ansible/facts.d/ansible.facts
-  template:
+  ansible.builtin.template:
     src: etc/ansible/facts.d/ansible.fact.j2
     dest: /etc/ansible/facts.d/ansible.fact
     owner: root
