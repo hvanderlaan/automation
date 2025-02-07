@@ -36,9 +36,9 @@
     update_cache: true
     cache_valid_time: 86400
     state: present
-    loop: "{{ deb_packages }}"
+  loop: "{{ deb_packages }}"
 
 - name: snap -> installing default packages
   community.general.snap:
     name: "{{ item }}"
-    loop: "{{ snap_packages }}"
+  loop: "{{ snap_packages }}"
