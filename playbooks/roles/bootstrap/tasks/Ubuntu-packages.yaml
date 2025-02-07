@@ -40,7 +40,7 @@
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present
-  loop: "{{ deb_packages }}"
+  loop: "{{ ubuntu_packages }}"
 
 - name: snap -> installing default packages
   community.general.snap:

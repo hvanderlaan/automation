@@ -31,6 +31,7 @@
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                                #
 # ============================================================================ #
 
+# For Debian and Raspbian distro
 deb_packages:
   - vim
   - curl
@@ -38,6 +39,16 @@ deb_packages:
   - python3-pip
   - dnsutils
   - neofetch
+  - bashtop
+
+# For Ubuntu distro
+ubuntu_packages:
+  - vim
+   - curl
+   - htop
+   - python3-pip
+   - dnsutils
+   - neofetch
 
 snap_packages:
   - bashtop
