@@ -38,4 +38,3 @@ deb_packages:
   - python3-pip
   - dnsutils
   - neofetch
-  - btop
